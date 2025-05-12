@@ -6,15 +6,46 @@ const quotes = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize
+    // Initialize theme
+    initializeTheme();
+    // Other initializations
     loadWorkouts();
     setupEventListeners();
     updateMotivationalQuote();
     drawProgressChart([]);
 });
 
+// Initialize theme based on localStorage or system preference
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+        updateThemeToggleButton(savedTheme === 'dark');
+    } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.body.classList.toggle('dark-mode', prefersDark);
+        updateThemeToggleButton(prefersDark);
+    }
+}
+
+// Update theme toggle button icon
+function updateThemeToggleButton(isDark) {
+    const toggleButton = document.getElementById('theme-toggle');
+    toggleButton.textContent = isDark ? '☀️' : '🌙';
+    toggleButton.setAttribute('aria-label', isDark ? 'Przełącz na tryb jasny' : 'Przełącz na tryb ciemny');
+    toggleButton.setAttribute('title', isDark ? 'Przełącz na tryb jasny' : 'Przełącz na tryb ciemny');
+}
+
 // Event listeners
 function setupEventListeners() {
+    // Theme toggle
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeToggleButton(isDark);
+    });
+    
     // Form submission
     document.getElementById('workout-form').addEventListener('submit', handleFormSubmit);
     
