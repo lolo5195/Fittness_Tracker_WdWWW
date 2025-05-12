@@ -56,6 +56,13 @@ function setupEventListeners() {
     // Hamburger menu
     document.querySelector('.hamburger').addEventListener('click', toggleMenu);
     
+    // Close menu on link click
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+        });
+    });
+    
     // Carousel
     document.querySelector('.carousel-prev').addEventListener('click', () => moveCarousel(-1));
     document.querySelector('.carousel-next').addEventListener('click', () => moveCarousel(1));
