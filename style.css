@@ -213,8 +213,26 @@ dialog {
   background: white;
 }
 
-#progress-chart {
-  margin-top: 1rem;
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #3498db;
+  color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  display: none;
+  z-index: 1000;
+}
+
+.toast.active {
+  display: block;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(20px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
 }
 
 /* Dark mode */
@@ -288,6 +306,10 @@ body.dark-mode .logo {
 
 body.dark-mode .logo:hover {
   color: #3498db;
+}
+
+body.dark-mode .toast {
+  background: #1c2526;
 }
 
 /* Responsive design */

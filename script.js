@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadWorkouts();
     setupEventListeners();
     updateMotivationalQuote();
-    drawProgressChart([]);
 });
 
 // Initialize theme based on localStorage or system preference
@@ -47,7 +46,12 @@ function setupEventListeners() {
     });
     
     // Form submission
-    document.getElementById('workout-form').addEventListener('submit', handleFormSubmit);
+    const form = document.getElementById('workout-form');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    } else {
+        console.error('Formularz #workout-form nie znaleziony!');
+    }
     
     // Filter and sort
     document.getElementById('filter-type').addEventListener('change', filterAndSortWorkouts);
@@ -78,43 +82,54 @@ function setupEventListeners() {
 
 // Form submission
 async function handleFormSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    const type = form.type.value;
-    const duration = parseInt(form.duration.value);
-    const calories = parseInt(form.calories.value);
-    
-    if (!type || duration <= 0 || calories < 0) {
-        document.getElementById('form-error').textContent = 'Wypełnij poprawnie wszystkie pola!';
-        return;
-    }
-    
-    const workout = {
-        id: Date.now(),
-        type,
-        duration,
-        calories,
-        date: new Date().toISOString()
-    };
-    
     try {
+        e.preventDefault(); // Prevent default form submission (page reload)
+        
+        const form = e.target;
+        const type = form.type.value;
+        const duration = parseInt(form.duration.value);
+        const calories = parseInt(form.calories.value);
+        
+        if (!type || duration <= 0 || calories < 0) {
+            document.getElementById('form-error').textContent = 'Wypełnij poprawnie wszystkie pola!';
+            return;
+        }
+        
+        const workout = {
+            id: Date.now(),
+            type,
+            duration,
+            calories,
+            date: new Date().toISOString()
+        };
+        
         // Save to backend
-        await fetch(API_URL, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(workout)
         });
         
+        if (!response.ok) {
+            throw new Error(`Błąd HTTP: ${response.status}`);
+        }
+        
         // Save to localStorage
         saveToLocalStorage(workout);
+        
+        // Show toast notification
+        const toast = document.getElementById('toast');
+        toast.textContent = 'Trening dodany!';
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 3000);
         
         // Update UI
         form.reset();
         document.getElementById('form-error').textContent = '';
         loadWorkouts();
     } catch (error) {
-        document.getElementById('form-error').textContent = 'Błąd podczas zapisywania treningu!';
-        console.error(error);
+        document.getElementById('form-error').textContent = 'Błąd podczas zapisywania treningu! Sprawdź, czy json-server działa.';
+        console.error('Błąd w handleFormSubmit:', error);
     }
 }
 
@@ -125,11 +140,9 @@ async function loadWorkouts() {
         if (!response.ok) throw new Error('Błąd sieci');
         const workouts = await response.json();
         updateWorkoutTable(workouts);
-        drawProgressChart(workouts);
     } catch (error) {
         const workouts = getFromLocalStorage();
         updateWorkoutTable(workouts);
-        drawProgressChart(workouts);
         console.error('Błąd ładowania danych:', error);
     }
 }
@@ -230,26 +243,4 @@ function updateMotivationalQuote() {
     const quoteElement = document.getElementById('quote-text');
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     quoteElement.textContent = randomQuote;
-}
-
-// Progress chart
-function drawProgressChart(workouts) {
-    const canvas = document.getElementById('progress-chart');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    if (workouts.length === 0) return;
-    
-    const maxDuration = Math.max(...workouts.map(w => w.duration));
-    const stepX = canvas.width / (workouts.length - 1);
-    const stepY = canvas.height / maxDuration;
-    
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height - workouts[0].duration * stepY);
-    workouts.forEach((workout, i) => {
-        ctx.lineTo(i * stepX, canvas.height - workout.duration * stepY);
-    });
-    ctx.strokeStyle = '#3498db';
-    ctx.lineWidth = 2;
-    ctx.stroke();
 }

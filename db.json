@@ -1,11 +1,60 @@
 {
   "workouts": [
     {
-      "id": 1747076456317,
+      "id": "1747076456317",
       "type": "Bieganie",
       "duration": 60,
       "calories": 260,
       "date": "2025-05-12T19:00:56.317Z"
+    },
+    {
+      "id": 1747080131718,
+      "type": "Rower",
+      "duration": 120,
+      "calories": 460,
+      "date": "2025-05-12T20:02:11.718Z"
+    },
+    {
+      "id": 1747080148737,
+      "type": "Bieganie",
+      "duration": 15,
+      "calories": 100,
+      "date": "2025-05-12T20:02:28.737Z"
+    },
+    {
+      "id": 1747080487282,
+      "type": "Joga",
+      "duration": 400,
+      "calories": 143,
+      "date": "2025-05-12T20:08:07.282Z"
+    },
+    {
+      "id": 1747080496960,
+      "type": "Siłownia",
+      "duration": 43,
+      "calories": 13,
+      "date": "2025-05-12T20:08:16.960Z"
+    },
+    {
+      "id": 1747080752754,
+      "type": "Rower",
+      "duration": 55,
+      "calories": 142,
+      "date": "2025-05-12T20:12:32.754Z"
+    },
+    {
+      "id": 1747080762944,
+      "type": "Siłownia",
+      "duration": 24,
+      "calories": 55,
+      "date": "2025-05-12T20:12:42.944Z"
+    },
+    {
+      "id": 1747081020309,
+      "type": "Bieganie",
+      "duration": 30,
+      "calories": 200,
+      "date": "2025-05-12T20:17:00.309Z"
     }
   ]
 }

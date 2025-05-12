@@ -25,7 +25,7 @@
     <main>
         <section id="add-workout">
             <h2>Dodaj nowy trening</h2>
-            <form id="workout-form" aria-label="Formularz dodawania treningu">
+            <form id="workout-form" action="javascript:void(0)" aria-label="Formularz dodawania treningu">
                 <label for="type">Typ treningu:</label>
                 <select id="type" name="type" required>
                     <option value="">Wybierz typ</option>
@@ -73,7 +73,6 @@
                 </thead>
                 <tbody id="workout-table-body"></tbody>
             </table>
-            <canvas id="progress-chart" width="400" height="200"></canvas>
         </section>
         <section id="tips">
             <h2>Porady fitness</h2>
@@ -93,6 +92,7 @@
             </div>
         </section>
     </main>
+    <div id="toast" class="toast"></div>
     <dialog id="workout-dialog">
         <h2>Szczegóły treningu</h2>
         <p id="dialog-content"></p>

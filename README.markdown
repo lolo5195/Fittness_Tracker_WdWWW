@@ -1,14 +1,13 @@
 # Fitness Tracker
 
-Fitness Tracker to responsywna aplikacja webowa do śledzenia aktywności fizycznych, umożliwiająca użytkownikom dodawanie, przeglądanie i filtrowanie treningów. Aplikacja oferuje intuicyjny interfejs z trybem ciemnym, animowanym menu nawigacyjnym i poradami fitness.
+Fitness Tracker to responsywna aplikacja webowa do śledzenia aktywności fizycznych, umożliwiająca użytkownikom dodawanie, przeglądanie i filtrowanie treningów. Aplikacja oferuje intuicyjny interfejs z trybem ciemnym, animowanym menu nawigacyjnym, powiadomieniami o dodaniu treningu i poradami fitness.
 
 ## Funkcjonalności
 
-- **Dodawanie treningów**: Rejestruj typ, czas trwania i spalone kalorie za pomocą formularza.
+- **Dodawanie treningów**: Rejestruj typ, czas trwania i spalone kalorie za pomocą formularza z potwierdzeniem dodania (powiadomienie toast).
 - **Przeglądanie i filtrowanie**: Wyświetlaj treningi w tabeli z opcjami filtrowania po typie i sortowania po dacie lub czasie trwania.
-- **Wykres postępów**: Wizualizacja czasu treningów na wykresie liniowym.
 - **Tryb ciemny/jasny**: Przełączanie między trybami z zapisem preferencji w `localStorage`.
-- **Responsywne menu**: Animowane menu nawigacyjne (wysuwane z lewej strony), zamykane po kliknięciu linku.
+- **Responsywne menu**: Animowane menu nawigacyjne (wysuwane z lewej strony), zamykane po kliknięciu linku, z poziomym układem linków.
 - **Porady fitness**: Karuzela z poradami i losowe cytaty motywacyjne.
 - **Dostępność**: Zgodność z WCAG (etykiety ARIA, odpowiedni kontrast).
 
@@ -48,7 +47,7 @@ Fitness Tracker to responsywna aplikacja webowa do śledzenia aktywności fizycz
    ```bash
    json-server --watch db.json
    ```
-   Serwer będzie dostępny na `http://localhost:3000/workouts`.
+   Serwer będzie dostępny na `http://localhost:3000/workouts`. Upewnij się, że serwer działa przed testowaniem aplikacji, aby uniknąć błędów zapisu danych.
 
 5. **Otwórz aplikację**:
    - Otwórz plik `index.html` w przeglądarce (np. przez podwójne kliknięcie) lub użyj lokalnego serwera:
@@ -58,14 +57,15 @@ Fitness Tracker to responsywna aplikacja webowa do śledzenia aktywności fizycz
      ```
      Strona będzie dostępna na `http://localhost:8080`.
    - Alternatywnie, użyj rozszerzenia Live Server w VS Code.
+   - Jeśli strona odświeża się po dodaniu treningu, wyczyść pamięć podręczną przeglądarki (Ctrl + Shift + R).
 
 ## Struktura projektu
 
 ```
 fitness-tracker/
 ├── index.html       # Główny plik HTML
-├── styles.css       # Style CSS (responsywność, tryb ciemny, animacje)
-├── script.js        # Logika JavaScript (formularz, API, menu, wykres)
+├── styles.css       # Style CSS (responsywność, tryb ciemny, animacje, powiadomienia)
+├── script.js        # Logika JavaScript (formularz, API, menu, karuzela)
 ├── db.json          # Baza danych dla json-server
 └── README.md        # Dokumentacja projektu
 ```
@@ -79,7 +79,9 @@ fitness-tracker/
 
 2. **Dodawanie treningu**:
    - W sekcji „Dodaj nowy trening” wybierz typ, podaj czas trwania i kalorie, a następnie kliknij „Dodaj”.
-   - Trening zapisuje się w `db.json` i `localStorage`.
+   - Po dodaniu pojawi się powiadomienie „Trening dodany!” w prawym dolnym rogu przez 3 sekundy.
+   - Trening zapisuje się w `db.json` i `localStorage`, a strona nie odświeża się.
+   - Jeśli pojawi się błąd (np. „Błąd podczas zapisywania treningu!”), sprawdź, czy `json-server` działa na `http://localhost:3000`.
 
 3. **Przeglądanie treningów**:
    - W sekcji „Twoje treningi” zobaczysz tabelę z treningami.
@@ -97,7 +99,10 @@ fitness-tracker/
 ## Testowanie
 
 ### Lokalne testowanie
-- Otwórz `index.html` w przeglądarce i sprawdź wszystkie funkcje (formularz, menu, tryb ciemny).
+- Otwórz `index.html` w przeglądarce i sprawdź wszystkie funkcje (formularz, menu, tryb ciemny, powiadomienia).
+- Upewnij się, że strona nie odświeża się po dodaniu treningu – sprawdź powiadomienie toast.
+- Wprowadź nieprawidłowe dane (np. ujemny czas) – powinien pojawić się komunikat błędu bez odświeżania.
+- Jeśli `json-server` nie działa, sprawdź konsolę przeglądarki (F12) pod kątem błędów sieciowych.
 - Użyj narzędzi deweloperskich (Ctrl + Shift + I w Chrome, tryb responsywny) do symulacji urządzeń mobilnych (np. iPhone 12, Galaxy S20).
 
 ### Testowanie na telefonie
@@ -117,7 +122,8 @@ fitness-tracker/
 5. Przetestuj:
    - Płynność animacji menu (wysuwanie po kliknięciu hamburgera, zamykanie po kliknięciu linku).
    - Czytelność linków w poziomym układzie.
-   - Funkcjonalność formularza, karuzeli i przełącznika trybu ciemnego.
+   - Funkcjonalność formularza, powiadomienia toast, karuzeli i przełącznika trybu ciemnego.
+   - Brak odświeżania strony po dodaniu treningu.
 
 ### Dostępność
 - Użyj narzędzia Lighthouse w Chrome (zakładka Audits) do sprawdzenia zgodności z WCAG.
@@ -126,18 +132,17 @@ fitness-tracker/
 ## Technologie
 
 - **HTML5**: Semantyczna struktura strony.
-- **CSS3**: Responsywne style, animacje (menu, przejścia), tryb ciemny.
-- **JavaScript (ES6)**: Logika aplikacji (Fetch API, `localStorage`, Canvas do wykresu).
+- **CSS3**: Responsywne style, animacje (menu, powiadomienia), tryb ciemny.
+- **JavaScript (ES6)**: Logika aplikacji (Fetch API, `localStorage`).
 - **json-server**: Symulacja backendu REST API.
-- **Canvas API**: Rysowanie wykresu postępów.
 
 ## Rozwój
 
 Aby rozbudować projekt, rozważ:
 - Dodanie autentykacji użytkownika.
 - Integrację z prawdziwym backendem (np. Firebase, MongoDB).
-- Rozszerzenie wykresu o więcej danych (np. kalorie, typy treningów).
-- Dodanie animacji dla innych elementów (np. karuzela, formularz).
+- Dodanie edycji i usuwania treningów.
+- Dodanie statystyk (np. suma kalorii, średni czas treningu).
 - Obsługę offline z Service Worker.
 
 ### Jak przyczynić się?
