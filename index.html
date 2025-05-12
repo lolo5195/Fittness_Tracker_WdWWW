@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <h1>Fitness Tracker</h1>
+            <button class="hamburger" aria-label="Otwórz menu" aria-expanded="false">☰</button>
+            <ul class="nav-menu">
+                <li><a href="#home">Strona główna</a></li>
+                <li><a href="#add-workout">Dodaj trening</a></li>
+                <li><a href="#workouts">Treningi</a></li>
+                <li><a href="#tips">Porady</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="add-workout">
+            <h2>Dodaj nowy trening</h2>
+            <form id="workout-form" aria-label="Formularz dodawania treningu">
+                <label for="type">Typ treningu:</label>
+                <select id="type" name="type" required>
+                    <option value="">Wybierz typ</option>
+                    <option value="Bieganie">Bieganie</option>
+                    <option value="Siłownia">Siłownia</option>
+                    <option value="Joga">Joga</option>
+                    <option value="Rower">Rower</option>
+                </select>
+                <label for="duration">Czas trwania (min):</label>
+                <input type="number" id="duration" name="duration" min="1" required>
+                <label for="calories">Spalone kalorie:</label>
+                <input type="number" id="calories" name="calories" min="0" required>
+                <button type="submit">Dodaj</button>
+                <p id="form-error" class="error" aria-live="polite"></p>
+            </form>
+        </section>
+        <section id="workouts">
+            <h2>Twoje treningi</h2>
+            <div class="filter-sort">
+                <label for="filter-type">Filtruj po typie:</label>
+                <select id="filter-type">
+                    <option value="">Wszystkie</option>
+                    <option value="Bieganie">Bieganie</option>
+                    <option value="Siłownia">Siłownia</option>
+                    <option value="Joga">Joga</option>
+                    <option value="Rower">Rower</option>
+                </select>
+                <label for="sort-by">Sortuj według:</label>
+                <select id="sort-by">
+                    <option value="date-desc">Data (najnowsze)</option>
+                    <option value="date-asc">Data (najstarsze)</option>
+                    <option value="duration-desc">Czas (malejąco)</option>
+                    <option value="duration-asc">Czas (rosnąco)</option>
+                </select>
+            </div>
+            <table id="workout-table">
+                <thead>
+                    <tr>
+                        <th>Typ</th>
+                        <th>Czas (min)</th>
+                        <th>Kalorie</th>
+                        <th>Data</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody id="workout-table-body"></tbody>
+            </table>
+            <canvas id="progress-chart" width="400" height="200"></canvas>
+        </section>
+        <section id="tips">
+            <h2>Porady fitness</h2>
+            <div class="carousel">
+                <button class="carousel-prev" aria-label="Poprzednia porada">❮</button>
+                <div class="carousel-items">
+                    <div class="carousel-item">Pij dużo wody podczas treningu!</div>
+                    <div class="carousel-item">Rozgrzewka zapobiega kontuzjom.</div>
+                    <div class="carousel-item">Regeneracja jest równie ważna co trening.</div>
+                </div>
+                <button class="carousel-next" aria-label="Następna porada">❯</button>
+            </div>
+            <div id="motivational-quote">
+                <h3>Motywacja dnia</h3>
+                <p id="quote-text">Każdy krok przybliża Cię do celu!</p>
+                <button id="new-quote">Nowy cytat</button>
+            </div>
+        </section>
+    </main>
+    <dialog id="workout-dialog">
+        <h2>Szczegóły treningu</h2>
+        <p id="dialog-content"></p>
+        <button id="close-dialog" aria-label="Zamknij okno dialogowe">Zamknij</button>
+    </dialog>
+    <footer>
+        <p>© 2025 Fitness Tracker. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
