@@ -21,7 +21,7 @@ Fitness Tracker to responsywna aplikacja webowa do śledzenia aktywności fizycz
 
 1. **Sklonuj repozytorium**:
    ```bash
-   git clone https://github.com/<twoj-username>/fitness-tracker.git
+   git clone https://github.com/lolo5195/Fittness_Tracker_WdWWW.git
    cd fitness-tracker
    ```
 
@@ -105,29 +105,6 @@ fitness-tracker/
 - Jeśli `json-server` nie działa, sprawdź konsolę przeglądarki (F12) pod kątem błędów sieciowych.
 - Użyj narzędzi deweloperskich (Ctrl + Shift + I w Chrome, tryb responsywny) do symulacji urządzeń mobilnych (np. iPhone 12, Galaxy S20).
 
-### Testowanie na telefonie
-1. Uruchom `json-server` z dostępem sieciowym:
-   ```bash
-   json-server --watch db.json --host 0.0.0.0
-   ```
-2. Zaktualizuj `API_URL` w `script.js` na adres IP komputera, np.:
-   ```javascript
-   const API_URL = 'http://192.168.1.100:3000/workouts';
-   ```
-3. Uruchom serwer HTTP:
-   ```bash
-   http-server
-   ```
-4. Na telefonie (w tej samej sieci Wi-Fi) otwórz przeglądarkę i wpisz adres, np. `http://192.168.1.100:8080`.
-5. Przetestuj:
-   - Płynność animacji menu (wysuwanie po kliknięciu hamburgera, zamykanie po kliknięciu linku).
-   - Czytelność linków w poziomym układzie.
-   - Funkcjonalność formularza, powiadomienia toast, karuzeli i przełącznika trybu ciemnego.
-   - Brak odświeżania strony po dodaniu treningu.
-
-### Dostępność
-- Użyj narzędzia Lighthouse w Chrome (zakładka Audits) do sprawdzenia zgodności z WCAG.
-- Przetestuj z czytnikiem ekranu (np. NVDA, VoiceOver).
 
 ## Technologie
 
