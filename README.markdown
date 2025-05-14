@@ -136,14 +136,6 @@ fitness-tracker/
 - **JavaScript (ES6)**: Logika aplikacji (Fetch API, `localStorage`).
 - **json-server**: Symulacja backendu REST API.
 
-## Rozwój
-
-Aby rozbudować projekt, rozważ:
-- Dodanie autentykacji użytkownika.
-- Integrację z prawdziwym backendem (np. Firebase, MongoDB).
-- Dodanie edycji i usuwania treningów.
-- Dodanie statystyk (np. suma kalorii, średni czas treningu).
-- Obsługę offline z Service Worker.
 
 ### Jak przyczynić się?
 1. Sforkuj repozytorium.
