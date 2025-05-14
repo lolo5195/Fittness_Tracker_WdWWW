@@ -96,38 +96,13 @@ fitness-tracker/
    - Przeglądaj porady w karuzeli (przyciski ❮/❯).
    - Kliknij „Nowy cytat” w sekcji „Motywacja dnia”, aby zobaczyć losowy cytat.
 
-## Testowanie
-
-### Lokalne testowanie
+## Lokalne testowanie
 - Otwórz `index.html` w przeglądarce i sprawdź wszystkie funkcje (formularz, menu, tryb ciemny, powiadomienia).
 - Upewnij się, że strona nie odświeża się po dodaniu treningu – sprawdź powiadomienie toast.
 - Wprowadź nieprawidłowe dane (np. ujemny czas) – powinien pojawić się komunikat błędu bez odświeżania.
 - Jeśli `json-server` nie działa, sprawdź konsolę przeglądarki (F12) pod kątem błędów sieciowych.
 - Użyj narzędzi deweloperskich (Ctrl + Shift + I w Chrome, tryb responsywny) do symulacji urządzeń mobilnych (np. iPhone 12, Galaxy S20).
 
-### Testowanie na telefonie
-1. Uruchom `json-server` z dostępem sieciowym:
-   ```bash
-   json-server --watch db.json --host 0.0.0.0
-   ```
-2. Zaktualizuj `API_URL` w `script.js` na adres IP komputera, np.:
-   ```javascript
-   const API_URL = 'http://192.168.1.100:3000/workouts';
-   ```
-3. Uruchom serwer HTTP:
-   ```bash
-   http-server
-   ```
-4. Na telefonie (w tej samej sieci Wi-Fi) otwórz przeglądarkę i wpisz adres, np. `http://192.168.1.100:8080`.
-5. Przetestuj:
-   - Płynność animacji menu (wysuwanie po kliknięciu hamburgera, zamykanie po kliknięciu linku).
-   - Czytelność linków w poziomym układzie.
-   - Funkcjonalność formularza, powiadomienia toast, karuzeli i przełącznika trybu ciemnego.
-   - Brak odświeżania strony po dodaniu treningu.
-
-### Dostępność
-- Użyj narzędzia Lighthouse w Chrome (zakładka Audits) do sprawdzenia zgodności z WCAG.
-- Przetestuj z czytnikiem ekranu (np. NVDA, VoiceOver).
 
 ## Technologie
 
@@ -136,14 +111,6 @@ fitness-tracker/
 - **JavaScript (ES6)**: Logika aplikacji (Fetch API, `localStorage`).
 - **json-server**: Symulacja backendu REST API.
 
-## Rozwój
-
-Aby rozbudować projekt, rozważ:
-- Dodanie autentykacji użytkownika.
-- Integrację z prawdziwym backendem (np. Firebase, MongoDB).
-- Dodanie edycji i usuwania treningów.
-- Dodanie statystyk (np. suma kalorii, średni czas treningu).
-- Obsługę offline z Service Worker.
 
 ### Jak przyczynić się?
 1. Sforkuj repozytorium.
