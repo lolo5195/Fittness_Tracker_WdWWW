@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadWorkouts();
     setupEventListeners();
     updateMotivationalQuote();
+    const items = document.querySelectorAll('.carousel-item');
+    if (items.length > 0) {
+        items[0].classList.add('active');
+    }
 });
 
 // Initialize theme based on localStorage or system preference
@@ -118,10 +122,14 @@ async function handleFormSubmit(e) {
         saveToLocalStorage(workout);
         
         // Show toast notification
-        const toast = document.getElementById('toast');
-        toast.textContent = 'Trening dodany!';
-        toast.classList.add('active');
-        setTimeout(() => toast.classList.remove('active'), 3000);
+        const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Dodano!';
+    submitBtn.disabled = true;
+    setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 2000);
         
         // Update UI
         form.reset();
