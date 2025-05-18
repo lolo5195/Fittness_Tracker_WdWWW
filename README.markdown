@@ -21,8 +21,7 @@ Fitness Tracker to responsywna aplikacja webowa do śledzenia aktywności fizycz
 
 1. **Sklonuj repozytorium**:
    ```bash
-   git clone https://github.com/<twoj-username>/fitness-tracker.git
-   cd fitness-tracker
+   git clone https://github.com/lolo5195/Fittness_Tracker_WdWWW
    ```
 
 2. **Zainstaluj zależności**:
