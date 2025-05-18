@@ -2,7 +2,20 @@ const API_URL = 'http://localhost:3000/workouts'; // json-server endpoint
 const quotes = [
     "Każdy krok przybliża Cię do celu!",
     "Twoja wytrwałość to Twoja siła!",
-    "Małe kroki prowadzą do wielkich wyników!"
+    "Małe kroki prowadzą do wielkich wyników!",
+    "Nie musisz być wielki, by zacząć. Zacznij, by być wielki!",
+    "Ruch to inwestycja w siebie.",
+    "Nie poddawaj się - efekty przyjdą z czasem.",
+    "Twój największy rywal to Ty sam z wczoraj.",
+    "Regeneracja jest tak samo ważna jak trening.",
+    "Pamiętaj o nawodnieniu podczas ćwiczeń.",
+    "Zadbaj o rozgrzewkę przed każdym treningiem.",
+    "Nie licz powtórzeń, rób je najlepiej jak potrafisz.",
+    "Zdrowe ciało to szczęśliwy umysł.",
+    "Każdy trening przybliża Cię do lepszej wersji siebie.",
+    "Nie szukaj wymówek - szukaj możliwości.",
+    "Dieta to 70% sukcesu, trening 30%.",
+    "Odpoczynek to część procesu - nie zaniedbuj go."
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
