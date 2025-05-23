@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (items.length > 0) {
         items[0].classList.add('active');
     }
+    fetchStats();
 });
 
 // Initialize theme based on localStorage or system preference
@@ -148,6 +149,7 @@ async function handleFormSubmit(e) {
         form.reset();
         document.getElementById('form-error').textContent = '';
         loadWorkouts();
+        fetchStats();
     } catch (error) {
         document.getElementById('form-error').textContent = 'Błąd podczas zapisywania treningu! Sprawdź, czy json-server działa.';
         console.error('Błąd w handleFormSubmit:', error);
@@ -188,6 +190,8 @@ function updateWorkoutTable(workouts) {
     document.querySelectorAll('.view-btn').forEach(btn => {
         btn.addEventListener('click', () => showWorkoutDetails(btn.dataset.id));
     });
+
+    fetchStats();
 }
 
 // Filter and sort workouts
@@ -264,4 +268,35 @@ function updateMotivationalQuote() {
     const quoteElement = document.getElementById('quote-text');
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     quoteElement.textContent = randomQuote;
+}
+
+// Fetch stats
+async function fetchStats() {
+    let workouts = [];
+    try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error();
+        workouts = await res.json();
+    } catch {
+        workouts = getFromLocalStorage();
+    }
+
+    const totalDuration = workouts.reduce((acc, w) => acc + Number(w.duration), 0);
+    const totalCalories = workouts.reduce((acc, w) => acc + Number(w.calories), 0);
+    const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const weekly = workouts.filter(w => new Date(w.date) > oneWeekAgo).length;
+
+    const typeCount = {};
+    workouts.forEach(w => typeCount[w.type] = (typeCount[w.type] || 0) + 1);
+    const mostCommonType = Object.keys(typeCount).length
+        ? Object.keys(typeCount).reduce((a, b) => typeCount[a] > typeCount[b] ? a : b)
+        : '-';
+
+    const avgDuration = workouts.length ? (totalDuration / workouts.length).toFixed(1) : 0;
+
+    document.getElementById('total-duration').textContent = totalDuration;
+    document.getElementById('total-calories').textContent = totalCalories;
+    document.getElementById('weekly-workouts').textContent = weekly;
+    document.getElementById('most-common-type').textContent = mostCommonType;
+    document.getElementById('avg-duration').textContent = avgDuration;
 }
