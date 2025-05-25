@@ -327,3 +327,11 @@ body.dark-mode .toast {
       font-size: 1rem;
   }
 }
+
+blockquote {
+  font-style: italic;
+  border-left: 4px solid var(--accent-color);
+  padding-left: 1em;
+  margin: 1em 0;
+  color: var(--text-color);
+}

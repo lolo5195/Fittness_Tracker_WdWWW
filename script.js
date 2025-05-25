@@ -1,9 +1,6 @@
 const API_URL = 'http://localhost:3000/workouts'; // json-server endpoint
-const quotes = [
-    "Każdy krok przybliża Cię do celu!",
-    "Twoja wytrwałość to Twoja siła!",
-    "Małe kroki prowadzą do wielkich wyników!"
-];
+
+import { quotes } from './quotes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme
