@@ -249,3 +249,29 @@ function updateMotivationalQuote() {
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     quoteElement.textContent = randomQuote;
 }
+
+// Motto typing effect
+function typeEffect() {
+    const text = "Twój codzienny krok ku lepszej formie!";
+    const mottoEl = document.getElementById("motto-text");
+    let index = 0;
+
+    function typeChar() {
+        if (index < text.length) {
+            mottoEl.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeChar, 80);
+        }
+    }
+
+    typeChar();
+
+    setTimeout(() => {
+        mottoEl.classList.add("hide-cursor");
+    }, 5000);
+}
+
+// Po załadowaniu DOM
+document.addEventListener('DOMContentLoaded', () => {
+    typeEffect();
+})
