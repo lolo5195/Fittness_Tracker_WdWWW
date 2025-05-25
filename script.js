@@ -307,3 +307,21 @@ function populateTipsCarousel(tips) {
         carouselContainer.appendChild(div);
     });
 }
+
+let shownExitMessage = false;
+
+document.addEventListener('mouseout', (e) => {
+    if (!e.relatedTarget && e.clientY <= 0 && !shownExitMessage) {
+        shownExitMessage = true;
+
+        const exitBanner = document.getElementById('exit-banner');
+        if (exitBanner) {
+            exitBanner.style.display = 'block';
+
+            setTimeout(() => {
+                exitBanner.style.display = 'none';
+                shownExitMessage = false;
+            }, 4000);
+        }
+    }
+});
