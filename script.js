@@ -274,4 +274,40 @@ function typeEffect() {
 // Po załadowaniu DOM
 document.addEventListener('DOMContentLoaded', () => {
     typeEffect();
-})
+    loadTipsFromJsonn();
+});
+
+function loadTipsFromJsonn() {
+    fetch('tips.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Błąd ładowania tips.json');
+            return response.json();
+        })
+        .then(tips => {
+            console.log("Załadowano porady:", tips);
+            populateTipsCarousel(tips);
+        })
+        .catch(error => {
+            console.error('Nie udało się załadować porad:', error);
+        });
+}
+
+// Porady fitness
+function populateTipsCarousel(tips) {
+    const carouselContainer = document.querySelector('.carousel-items');
+
+    if (!carouselContainer) {
+        console.error('Nie znaleziono .carousel-items');
+        return;
+    }
+
+    carouselContainer.innerHTML = '';
+
+    tips.forEach((tip, index) => {
+        const div = document.createElement('div');
+        div.className = 'carousel-item';
+        if (index === 0) div.classList.add('active');
+        div.textContent = tip;
+        carouselContainer.appendChild(div);
+    });
+}
