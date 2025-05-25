@@ -106,5 +106,11 @@
         <p>© 2025 Fitness Tracker. Wszystkie prawa zastrzeżone.</p>
     </footer>
     <script type="module" src="script.js"></script>
+    <div id="minigame" style="display:none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: #222; color: #fff; padding: 2rem; border-radius: 1rem; text-align: center; z-index: 1000;">
+        <div id="muscle-emoji" style="font-size: 8rem; cursor: pointer; user-select: none;">💪</div>
+        <p>Kliknięcia: <span id="click-count">0</span></p>
+        <button id="close-minigame" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem;">Zamknij minigierkę i wróć na siłownię</button>
+    </div>
+    <script src="minigame.js" defer></script>
 </body>
 </html>
