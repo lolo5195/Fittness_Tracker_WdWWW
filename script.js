@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (items.length > 0) {
         items[0].classList.add('active');
     }
+    typeEffect();
+    loadTipsFromJson();
 });
 
 // Initialize theme based on localStorage or system preference
@@ -271,13 +273,7 @@ function typeEffect() {
     }, 5000);
 }
 
-// Po załadowaniu DOM
-document.addEventListener('DOMContentLoaded', () => {
-    typeEffect();
-    loadTipsFromJsonn();
-});
-
-function loadTipsFromJsonn() {
+function loadTipsFromJson() {
     fetch('tips.json')
         .then(response => {
             if (!response.ok) throw new Error('Błąd ładowania tips.json');
