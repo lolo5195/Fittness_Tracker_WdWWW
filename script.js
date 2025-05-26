@@ -1,22 +1,6 @@
 const API_URL = 'http://localhost:3000/workouts'; // json-server endpoint
-const quotes = [
-    "Każdy krok przybliża Cię do celu!",
-    "Twoja wytrwałość to Twoja siła!",
-    "Małe kroki prowadzą do wielkich wyników!",
-    "Nie musisz być wielki, by zacząć. Zacznij, by być wielki!",
-    "Ruch to inwestycja w siebie.",
-    "Nie poddawaj się - efekty przyjdą z czasem.",
-    "Twój największy rywal to Ty sam z wczoraj.",
-    "Regeneracja jest tak samo ważna jak trening.",
-    "Pamiętaj o nawodnieniu podczas ćwiczeń.",
-    "Zadbaj o rozgrzewkę przed każdym treningiem.",
-    "Nie licz powtórzeń, rób je najlepiej jak potrafisz.",
-    "Zdrowe ciało to szczęśliwy umysł.",
-    "Każdy trening przybliża Cię do lepszej wersji siebie.",
-    "Nie szukaj wymówek - szukaj możliwości.",
-    "Dieta to 70% sukcesu, trening 30%.",
-    "Odpoczynek to część procesu - nie zaniedbuj go."
-];
+
+import { quotes } from './quotes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme
@@ -29,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (items.length > 0) {
         items[0].classList.add('active');
     }
-    fetchStats();
+    typeEffect();
+    loadTipsFromJson();
 });
 
 // Initialize theme based on localStorage or system preference
@@ -300,3 +285,76 @@ async function fetchStats() {
     document.getElementById('most-common-type').textContent = mostCommonType;
     document.getElementById('avg-duration').textContent = avgDuration;
 }
+// Motto typing effect
+function typeEffect() {
+    const text = "Twój codzienny krok ku lepszej formie!";
+    const mottoEl = document.getElementById("motto-text");
+    let index = 0;
+
+    function typeChar() {
+        if (index < text.length) {
+            mottoEl.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeChar, 80);
+        }
+    }
+
+    typeChar();
+
+    setTimeout(() => {
+        mottoEl.classList.add("hide-cursor");
+    }, 5000);
+}
+
+function loadTipsFromJson() {
+    fetch('tips.json')
+        .then(response => {
+            if (!response.ok) throw new Error('Błąd ładowania tips.json');
+            return response.json();
+        })
+        .then(tips => {
+            console.log("Załadowano porady:", tips);
+            populateTipsCarousel(tips);
+        })
+        .catch(error => {
+            console.error('Nie udało się załadować porad:', error);
+        });
+}
+
+// Porady fitness
+function populateTipsCarousel(tips) {
+    const carouselContainer = document.querySelector('.carousel-items');
+
+    if (!carouselContainer) {
+        console.error('Nie znaleziono .carousel-items');
+        return;
+    }
+
+    carouselContainer.innerHTML = '';
+
+    tips.forEach((tip, index) => {
+        const div = document.createElement('div');
+        div.className = 'carousel-item';
+        if (index === 0) div.classList.add('active');
+        div.textContent = tip;
+        carouselContainer.appendChild(div);
+    });
+}
+
+let shownExitMessage = false;
+
+document.addEventListener('mouseout', (e) => {
+    if (!e.relatedTarget && e.clientY <= 0 && !shownExitMessage) {
+        shownExitMessage = true;
+
+        const exitBanner = document.getElementById('exit-banner');
+        if (exitBanner) {
+            exitBanner.style.display = 'block';
+
+            setTimeout(() => {
+                exitBanner.style.display = 'none';
+                shownExitMessage = false;
+            }, 4000);
+        }
+    }
+});

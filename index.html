@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav class="nav-container">
-            <a href="#home" class="logo">Fitness Tracker</a>
+            <div class="branding">
+              <a href="#home" class="logo">Fitness Tracker</a>
+              <p class="motto"><span id="motto-text"></span></p>
+            </div>
             <div class="nav-controls">
                 <button id="theme-toggle" aria-label="Przełącz tryb jasny lub ciemny" title="Przełącz tryb">☀️</button>
                 <button class="hamburger" aria-label="Otwórz menu" aria-expanded="false">☰</button>
@@ -88,28 +92,13 @@
             <h2>Porady fitness</h2>
             <div class="carousel">
                 <button class="carousel-prev" aria-label="Poprzednia porada">❮</button>
-                <div class="carousel-items">
-                    <div class="carousel-item">Pij dużo wody podczas treningu!</div>
-                    <div class="carousel-item">Rozgrzewka zapobiega kontuzjom.</div>
-                    <div class="carousel-item">Regeneracja jest równie ważna co trening.</div>
-                    <div class="carousel-item">Dbaj o prawidłową technikę ćwiczeń.</div>
-                    <div class="carousel-item">Nie pomijaj rozciągania po treningu.</div>
-                    <div class="carousel-item">Wyznaczaj sobie realne cele i świętuj postępy.</div>
-                    <div class="carousel-item">Trening siłowy wzmacnia nie tylko mięśnie, ale i charakter.</div>
-                    <div class="carousel-item">Regularność jest ważniejsza niż intensywność.</div>
-                    <div class="carousel-item">Sen to najlepsza regeneracja dla organizmu.</div>
-                    <div class="carousel-item">Ćwicz z przyjaciółmi – razem raźniej!</div>
-                    <div class="carousel-item">Nie porównuj się do innych – każdy ma swoją drogę.</div>
-                    <div class="carousel-item">Pij wodę nawet wtedy, gdy nie czujesz pragnienia.</div>
-                    <div class="carousel-item">Zmieniaj rodzaje treningów, by uniknąć rutyny.</div>
-                    <div class="carousel-item">Dbaj o odpowiednią ilość białka w diecie.</div>
-                    <div class="carousel-item">Ruszaj się codziennie, nawet jeśli to tylko spacer.</div>
+                <div class="carousel-items" id="carousel-items">
                 </div>
                 <button class="carousel-next" aria-label="Następna porada">❯</button>
             </div>
             <div id="motivational-quote">
                 <h3>Motywacja dnia</h3>
-                <p id="quote-text">Każdy krok przybliża Cię do celu!</p>
+                <blockquote id="quote-text">Każdy krok przybliża Cię do celu!</blockquote>
                 <button id="new-quote">Nowy cytat</button>
             </div>
         </section>
@@ -123,6 +112,26 @@
     <footer>
         <p>© 2025 Fitness Tracker. Wszystkie prawa zastrzeżone.</p>
     </footer>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+    <div id="minigame" style="display:none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: #222; color: #fff; padding: 2rem; border-radius: 1rem; text-align: center; z-index: 1000;">
+        <div id="muscle-emoji" style="font-size: 8rem; cursor: pointer; user-select: none;">💪</div>
+        <p>Kliknięcia: <span id="click-count">0</span></p>
+        <button id="close-minigame" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem;">Zamknij minigierkę i wróć na siłownię</button>
+    </div>
+    <script src="minigame.js" defer></script>
+    <div id="exit-banner" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #812727;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 1.2em;
+        z-index: 9999;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);">🛑 Hej, Osiłku! Nie zapomnij zapisać swojego treningu! 💪
+    </div>
 </body>
 </html>
