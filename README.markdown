@@ -66,6 +66,9 @@ fitness-tracker/
 ├── styles.css       # Style CSS (responsywność, tryb ciemny, animacje, powiadomienia)
 ├── script.js        # Logika JavaScript (formularz, API, menu, karuzela)
 ├── db.json          # Baza danych dla json-server
+├── minigame.js      # Funkcjonowanie ukrytej minigry 
+├── tips.js          # Funkcjonowanie wyświetlania porad
+├── quotes.js        # Funkcjonowanie cytatów
 └── README.md        # Dokumentacja projektu
 ```
 
